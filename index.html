@@ -13,31 +13,31 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <div class="row">
-        <div class="col-auto align-items-center">
-            <div class="col-12 form-check">
+    <main class="container-fluid">
+        <div class="row">
+            <div class="row col-4 form-check">
                 <form class="mb-3">
                     <h3>Search For A City:</h3>
                     <input type="text" id="cityInput" class="form-text col-12" aria-describedby="citySearchInline" placeholder="Enter City">
                     <button type="submit" class="btn btn-primary border-bottom col-12 mt-3">Search</button>
                 </form>
-                <div class="col-12 mt-3" id="past-searches"></div>
-              </div>
-          </div>
+            </div>
 
+             <div class="row col-8">
+                <h3 id="searched-city">City Name</h3>
+                <div id="current-weather-data"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-4" id="past-searches"></div>
 
+            <div class="row col-8">
+                <h3 id="searched-city">5-Day Forecast</h3>
+                <div id="future-weather-data"></div>
+            </div>
 
-
-
-    </div>
-
-    <main class="container-fluid">
-
-
-
-
-
-    </main>
+        </div>
+</main>
     
 
 
