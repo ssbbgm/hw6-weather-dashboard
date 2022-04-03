@@ -1,0 +1,9 @@
+.top-line {
+    flex: row;
+    display: inline-flex;
+
+}
+
+#current-icon {
+    font-size: 50%;
+}
