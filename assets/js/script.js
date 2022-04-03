@@ -34,7 +34,7 @@ $(searchBtnEl).on ('click', function (event) {
 var getCurrentWeather = function (city) {
     let currentWeatherAPIKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
 
-    let apiUrl = `${BASE_URL} + ${city} + '&appid=' + ${currentWeatherAPIKey}`;
+    let apiUrl = `${BASE_URL}${city}&appid=${currentWeatherAPIKey}`;
     console.log(apiUrl);
   
     fetch(apiUrl)
@@ -52,3 +52,8 @@ var getCurrentWeather = function (city) {
        alert('Unable to connect to OpenWeather');
       });
   };
+
+//Display results
+
+
+  
