@@ -30,18 +30,15 @@ $(searchBtnEl).on ('click', function (event) {
 
 //Get the current weather data
 
-var getCurrentWeather = function (city) {
+let getCurrentWeather = function (city) {
     let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
-
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
-    console.log(apiUrl);
   
     fetch(apiUrl)
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
             displayCityData(data, city);
-            console.log(response);
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -55,7 +52,6 @@ var getCurrentWeather = function (city) {
 //Display results
 
 let displayCityData = function (weather, searchCity) {
-    console.log(weather);
 
     $("#searched-city").html(weather.name);
 
@@ -77,5 +73,32 @@ let displayCityData = function (weather, searchCity) {
     $("#wind").html(`Wind: ${weather.wind.speed} MPH`);
     $("#humidity").html(`Humidity: ${weather.main.humidity} %`);
 
+    let lon = weather.coord.lon;
+    let lat = weather.coord.lat;
+    console.log(lon, lat);
+
+    getUvIndex(lon, lat);
+
     }
+
+    function getUvIndex (lon, lat){
+        let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
+        let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`;
+    
+        fetch(apiUrl)
+        .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log(data);
+            displayUvData(data);
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+       alert('Unable to connect to OpenWeather');
+      });
+  };
+    
 
