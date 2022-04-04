@@ -81,7 +81,7 @@ let displayCityData = function (weather, searchCity) {
 
     }
 
-    function getUvIndex (lon, lat){
+function getUvIndex (lon, lat){
         let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
         let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&appid=${apiKey}`;
     
@@ -100,5 +100,12 @@ let displayCityData = function (weather, searchCity) {
        alert('Unable to connect to OpenWeather');
       });
   };
-    
+
+function displayUvData (current){
+    $('#uv-index').html(`UV Index: ${current.current.uvi}`);
+
+    if(current.current.uvi <=2){
+        
+    }
+}
 
