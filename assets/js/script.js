@@ -78,6 +78,7 @@ let displayCityData = function (weather, searchCity) {
     console.log(lon, lat);
 
     getUvIndex(lon, lat);
+    get5Day(lon, lat);
 
     }
 
@@ -99,6 +100,8 @@ function getUvIndex (lon, lat){
       .catch(function (error) {
        alert('Unable to connect to OpenWeather');
       });
+
+      
   };
 
 function displayUvData (current){
@@ -112,6 +115,27 @@ function displayUvData (current){
     } else {
         $('#uv-index').addClass('high');
     }
+}
+
+function get5Day (lon, lat) {
+    let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
+    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`;
+    console.log(apiUrl);
+  
+    fetch(apiUrl)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            console.log(data);
+            // display5DayData(data, city);
+          });
+        } else {
+          alert('Error: ' + response.statusText);
+        }
+      })
+      .catch(function (error) {
+       alert('Unable to connect to OpenWeather');
+      });
 }
 
 
