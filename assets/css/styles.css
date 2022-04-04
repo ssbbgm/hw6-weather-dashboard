@@ -8,3 +8,14 @@
     font-size: 50%;
 }
 
+.low {
+    background-color: green;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.high {
+    background-color: red;
+}

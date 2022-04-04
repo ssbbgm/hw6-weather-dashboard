@@ -102,10 +102,16 @@ function getUvIndex (lon, lat){
   };
 
 function displayUvData (current){
-    $('#uv-index').html(`UV Index: ${current.current.uvi}`);
+    let currentUv = current.current.uvi;
+    $('#uv-index').html(`UV Index: ${currentUv}`);
 
-    if(current.current.uvi <=2){
-        
+    if (currentUv <=2){
+        $('#uv-index').addClass('low');
+    } else if (currentUv >=3 && currentUv <=5) {
+        $('#uv-index').addClass('moderate');
+    } else {
+        $('#uv-index').addClass('high');
     }
 }
+
 
