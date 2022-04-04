@@ -38,6 +38,7 @@ let getCurrentWeather = function (city) {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
+            // console.log(data);
             displayCityData(data, city);
           });
         } else {
@@ -51,7 +52,7 @@ let getCurrentWeather = function (city) {
 
 //Display results
 
-let displayCityData = function (weather, searchCity) {
+let displayCityData = function (weather) {
 
     $("#searched-city").html(weather.name);
 
@@ -75,7 +76,6 @@ let displayCityData = function (weather, searchCity) {
 
     let lon = weather.coord.lon;
     let lat = weather.coord.lat;
-    console.log(lon, lat);
 
     getUvIndex(lon, lat);
     get5Day(lon, lat);
@@ -90,7 +90,6 @@ function getUvIndex (lon, lat){
         .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            console.log(data);
             displayUvData(data);
           });
         } else {
@@ -120,22 +119,28 @@ function displayUvData (current){
 function get5Day (lon, lat) {
     let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
     let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`;
-    console.log(apiUrl);
   
     fetch(apiUrl)
       .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            // display5DayData(data, city);
-          });
-        } else {
-          alert('Error: ' + response.statusText);
-        }
+        return response.json();
       })
-      .catch(function (error) {
-       alert('Unable to connect to OpenWeather');
-      });
-}
+      .then(function(data){
+        // console.log(data);
+        let list = data['list'];
+        console.log(list);
+        list.forEach(function(item){
+          let retrievedDate = new Date(list[0].dt * 1000);
+          let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
+          
+          const weatherIcon = item['weather']['icon'];
+          // weatherIcon.setAttribute('src', ` http://openweathermap.org/img/wn/${item['weather'].icon}@2x.png`)
+          console.log(weatherIcon);
+        })
 
+
+
+
+
+      })
+}
 
