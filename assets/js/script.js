@@ -141,7 +141,7 @@ function get5Day (lon, lat) {
           let retrievedDate = new Date(copyOfList[i].dt * 1000);
           let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
           console.log(topDates);
-          let weatherIcon = copyOfList[i].weather[i].icon;
+          let weatherIcon = copyOfList[i].weather[0].icon;
           console.log(weatherIcon);
           let temp = copyOfList[i].temp.day;
           console.log(temp);
