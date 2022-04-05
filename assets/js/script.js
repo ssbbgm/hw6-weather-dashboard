@@ -118,7 +118,10 @@ function displayUvData (current){
 
 function get5Day (lon, lat) {
     let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
-    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`;
+
+    // let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
+    // let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`; THIS ONE WORKED
   
     fetch(apiUrl)
       .then(function (response) {
@@ -128,13 +131,30 @@ function get5Day (lon, lat) {
         // console.log(data);
         let list = data['list'];
         console.log(list);
-        list.forEach(function(item){
-          let retrievedDate = new Date(list[0].dt * 1000);
+        list.forEach(function(item, index){
+          let retrievedDate = new Date(list[index].dt * 1000);
           let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
-          
-          const weatherIcon = item['weather']['icon'];
-          // weatherIcon.setAttribute('src', ` http://openweathermap.org/img/wn/${item['weather'].icon}@2x.png`)
-          console.log(weatherIcon);
+          console.log(topDates);
+          let weatherIcon = item.weather[0].icon;
+          let temp = item.main.temp;
+          let wind = item.wind.speed;
+          let humidity = item.main.humidity;
+
+          let card = document.createElement('div');
+          card.classList.add('card');
+          card.style.width = '18erem';
+
+
+  
+          // <div class="card" style="width: 18rem;">
+          // <div class="card-header">Featured</div>
+          // <ul class="list-group list-group-flush">
+          // <li class="list-group-item">An item</li>
+          // <li class="list-group-item">A second item</li>
+          // <li class="list-group-item">A third item</li>
+          // </ul>
+          // </div>
+
         })
 
 
