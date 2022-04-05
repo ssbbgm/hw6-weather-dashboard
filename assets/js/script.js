@@ -118,7 +118,7 @@ function displayUvData (current){
 
 function get5Day (lon, lat) {
     let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
-    let apiUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&units=imperial&cnt=5&appid=${apiKey}`;
 
     // let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
     // let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`; THIS ONE WORKED
@@ -129,16 +129,26 @@ function get5Day (lon, lat) {
       })
       .then(function(data){
         // console.log(data);
-        let list = data['list'];
-        console.log(list);
-        list.forEach(function(item, index){
-          let retrievedDate = new Date(list[index].dt * 1000);
+        let list = data['daily'];
+        let copyOfList = [...list];
+        // console.log(copyOfList);
+        copyOfList.shift();
+        copyOfList.splice(5, 2);
+        console.log(copyOfList);
+
+        // console.log(list);
+        for(let i=0; i < (copyOfList.length); i++) {
+          let retrievedDate = new Date(copyOfList[i].dt * 1000);
           let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
           console.log(topDates);
-          let weatherIcon = item.weather[0].icon;
-          let temp = item.main.temp;
-          let wind = item.wind.speed;
-          let humidity = item.main.humidity;
+          let weatherIcon = copyOfList[i].weather[i].icon;
+          console.log(weatherIcon);
+          let temp = copyOfList[i].temp.day;
+          console.log(temp);
+          let wind = copyOfList[i].wind_speed;
+          console.log(wind);
+          let humidity = copyOfList[i].humidity;
+          console.log(humidity);
 
           let card = document.createElement('div');
           card.classList.add('card');
@@ -155,7 +165,7 @@ function get5Day (lon, lat) {
           // </ul>
           // </div>
 
-        })
+        }
 
 
 
@@ -164,3 +174,48 @@ function get5Day (lon, lat) {
       })
 }
 
+// function get5Day (lon, lat) {
+
+//   let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
+//   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`; THIS ONE WORKED
+
+//   fetch(apiUrl)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function(data){
+//       // console.log(data);
+//       let list = data['list'];
+//       console.log(list);
+//       list.forEach(function(item, index){
+//         let retrievedDate = new Date(list[index].dt * 1000);
+//         let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
+//         console.log(topDates);
+//         let weatherIcon = item.weather[0].icon;
+//         let temp = item.main.temp;
+//         let wind = item.wind.speed;
+//         let humidity = item.main.humidity;
+
+//         let card = document.createElement('div');
+//         card.classList.add('card');
+//         card.style.width = '18erem';
+
+
+
+//         // <div class="card" style="width: 18rem;">
+//         // <div class="card-header">Featured</div>
+//         // <ul class="list-group list-group-flush">
+//         // <li class="list-group-item">An item</li>
+//         // <li class="list-group-item">A second item</li>
+//         // <li class="list-group-item">A third item</li>
+//         // </ul>
+//         // </div>
+
+//       })
+
+
+
+
+
+//     })
+// }
