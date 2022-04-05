@@ -153,14 +153,15 @@ function get5Day (lon, lat) {
           let card = document.createElement('div');
           card.classList.add('card');
           card.style.width = '20%';
+          card.style.height = '100%';
           card.innerHTML = `
             <div class="card">
-              <div class="card-header">Featured</div>
-              <ul class=" list-group list-group-flush border-0">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
-              <li class="list-group-item">A fourth item</li>
+              <div class="card-header">${topDates}</div>
+              <ul class=" list-group list-group-flush">
+              <li class="list-group-item">${weatherIcon}</li>
+              <li class="list-group-item">Temp: ${temp}&deg;F</li>
+              <li class="list-group-item">Wind: ${wind} MPH</li>
+              <li class="list-group-item">Humidity: ${humidity} %</li>
               </ul>
             </div>
           `;
