@@ -2,11 +2,12 @@
 let cityFormEl = document.getElementById('cityForm');
 let cityInputEl = document.getElementById('cityInput');
 let searchBtnEl = document.getElementById('citySearch');
-let searchedCityEl = document.getElementById('searcherd-city');
+let searchedCityEl = document.getElementById('searched-city');
 let currentWeatherEL = document.getElementById('current-weather-data');
 let pastCitiesEl = document.getElementById('past-searches');
 let fiveDayEl = document.getElementById('searched-city-five-day');
 let futureWeatherEl = document.getElementById('future-weather-data');
+let weatherIconEl = document.getElementById('weather-icon');
 
 
 //Global Variables
@@ -38,7 +39,7 @@ let getCurrentWeather = function (city) {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            // console.log(data);
+            console.log(data);
             displayCityData(data, city);
           });
         } else {
@@ -137,12 +138,16 @@ function get5Day (lon, lat) {
         console.log(copyOfList);
 
         // console.log(list);
-        for(let i=0; i < (copyOfList.length); i++) {
+        for(let i = 0; i < (copyOfList.length); i++) {
           let retrievedDate = new Date(copyOfList[i].dt * 1000);
           let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
           console.log(topDates);
+
           let weatherIcon = copyOfList[i].weather[0].icon;
           console.log(weatherIcon);
+
+        //  weatherIconEl.setAttribute('src', `http://openweathermap.org/img/wn/${copyOfList[i].weather[0].icon}@2x.png`)
+
           let temp = copyOfList[i].temp.day;
           console.log(temp);
           let wind = copyOfList[i].wind_speed;
@@ -158,7 +163,7 @@ function get5Day (lon, lat) {
             <div class="card">
               <div class="card-header">${topDates}</div>
               <ul class=" list-group list-group-flush">
-              <li class="list-group-item">${weatherIcon}</li>
+              <li class="list-group-item"><img src="http://openweathermap.org/img/wn/${copyOfList[i].weather[0].icon}@2x.png">${weatherIcon}</li>
               <li class="list-group-item">Temp: ${temp}&deg;F</li>
               <li class="list-group-item">Wind: ${wind} MPH</li>
               <li class="list-group-item">Humidity: ${humidity} %</li>
@@ -180,49 +185,3 @@ function get5Day (lon, lat) {
 
       })
 }
-
-// function get5Day (lon, lat) {
-
-//   let apiKey = 'e4bf4f9f84d50f60c4906ff3e10373be';
-//   let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&cnt=5&appid=${apiKey}`; THIS ONE WORKED
-
-//   fetch(apiUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function(data){
-//       // console.log(data);
-//       let list = data['list'];
-//       console.log(list);
-//       list.forEach(function(item, index){
-//         let retrievedDate = new Date(list[index].dt * 1000);
-//         let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
-//         console.log(topDates);
-//         let weatherIcon = item.weather[0].icon;
-//         let temp = item.main.temp;
-//         let wind = item.wind.speed;
-//         let humidity = item.main.humidity;
-
-//         let card = document.createElement('div');
-//         card.classList.add('card');
-//         card.style.width = '18erem';
-
-
-
-//         // <div class="card" style="width: 18rem;">
-//         // <div class="card-header">Featured</div>
-//         // <ul class="list-group list-group-flush">
-//         // <li class="list-group-item">An item</li>
-//         // <li class="list-group-item">A second item</li>
-//         // <li class="list-group-item">A third item</li>
-//         // </ul>
-//         // </div>
-
-//       })
-
-
-
-
-
-//     })
-// }
