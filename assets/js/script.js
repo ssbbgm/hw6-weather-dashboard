@@ -16,18 +16,18 @@ let cities = [];
 
 //Form Submission action
 $(searchBtnEl).on ('click', function (event) {
-    event.preventDefault();
-  
-    let city = cityInputEl.value.trim();
-  
-    if (city) {
-      getCurrentWeather(city);
-  
-      cityInputEl.value = '';
-    } else {
-      alert('Please enter a city');
-    }
-})  
+  event.preventDefault();
+
+  let city = cityInputEl.value.trim();
+
+  if (city) {
+    getCurrentWeather(city);
+
+    cityInputEl.value = '';
+  } else {
+    alert('Please enter a city');
+  }
+}) 
 
 //Get the current weather data
 
@@ -41,6 +41,7 @@ let getCurrentWeather = function (city) {
           response.json().then(function (data) {
             console.log(data);
             displayCityData(data, city);
+            localStorage.setItem(city, JSON.stringify(data));
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -146,7 +147,6 @@ function get5Day (lon, lat) {
           let weatherIcon = copyOfList[i].weather[0].icon;
           console.log(weatherIcon);
 
-        //  weatherIconEl.setAttribute('src', `http://openweathermap.org/img/wn/${copyOfList[i].weather[0].icon}@2x.png`)
 
           let temp = copyOfList[i].temp.day;
           console.log(temp);
@@ -163,7 +163,7 @@ function get5Day (lon, lat) {
             <div class="card">
               <div class="card-header">${topDates}</div>
               <ul class=" list-group list-group-flush">
-              <li class="list-group-item"><img src="http://openweathermap.org/img/wn/${copyOfList[i].weather[0].icon}@2x.png">${weatherIcon}</li>
+              <li class="list-group-item"><img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png"></li>
               <li class="list-group-item">Temp: ${temp}&deg;F</li>
               <li class="list-group-item">Wind: ${wind} MPH</li>
               <li class="list-group-item">Humidity: ${humidity} %</li>
