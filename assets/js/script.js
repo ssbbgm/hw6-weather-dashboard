@@ -14,36 +14,29 @@ let weatherIconEl = document.getElementById('weather-icon');
 
 let cities = [];
 
+getPastSearches();
+
 //Form Submission action
-$(searchBtnEl).on ('click', function (event) {
+$(searchBtnEl).on ('click', function formSubmission (event) {
   event.preventDefault();
 
   let city = cityInputEl.value.trim();
 
   if (city) {
     cities.push(city);
-    console.log(cities);
     getCurrentWeather(city);
     cityInputEl.value = '';
-
-  
-    var $button = $(`<button type='button' class='btn btn-secondary custom-btn'>${city}</button>`);
-    // Append it
-    $('#past-searches').append($button);
-
-    // Event for this button 
-    $button.on('click',function(){
-      let cityName = $(this).text();
-      console.log(cityName);
-      getCurrentWeather(cityName);
-    }); 
-
+    localStorage.setItem('searchHistory', JSON.stringify(cities));
+    getPastSearches();
+    
   } else {
     alert('Please enter a city');
   }
 
-
 }) 
+
+
+
 
 //Get the current weather data
 
@@ -55,9 +48,8 @@ let getCurrentWeather = function (city) {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
-            console.log(data);
             displayCityData(data, city);
-            localStorage.setItem(city, JSON.stringify(data));
+            // localStorage.setItem('searchHistory', JSON.stringify(cities));
           });
         } else {
           alert('Error: ' + response.statusText);
@@ -67,6 +59,7 @@ let getCurrentWeather = function (city) {
        alert('Unable to connect to OpenWeather');
       });
   };
+
 
 //Display results
 
@@ -83,6 +76,8 @@ let displayCityData = function (weather) {
           "/" +
           retrievedDate.getFullYear()
       );
+    
+    $('#current-icon').empty();
 
     const weatherIcon = document.createElement('img');
     weatherIcon.setAttribute('src', ` http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`)
@@ -183,35 +178,27 @@ function get5Day (lon, lat) {
 
           $('#future-weather-data').append(card);
          
-
-
-  
-          
-
         }
-
-
-
-
 
       })
 }
 
-// function pastSearches (city) {
+function getPastSearches(){
+    let cities = JSON.parse(localStorage.getItem('searchHistory'));
+    $('#past-searches').html('');
+    cities.forEach(function(city){
+      let $button = $(`<button type='button' class='city-btn btn-secondary custom-btn'>${city}</button>`);
+    // Append it
+    $('#past-searches').append($button);
 
-//   $(searchBtnEl).on ('click', function (event) {
-//   getCurrentWeather(JSON.parse(localStorage.getItem(city)));
-//   var $button = $(`<button type='button' class='btn btn-secondary'>${city}</button>`);
-//   // Append it
-//   $('#past-searches').append($button);
+  })}
+  
+// Event for this button 
+$('#past-searches').on('click', '.city-btn', function (event){
+  console.log('past searches clicked on');
+  event.preventDefault();
+  let cityName = $(this).text();
+  getCurrentWeather(cityName);
+}); 
 
-//   // Event for this button 
-//   $button.on('click',function(){
-//     getCurrentWeather(JSON.stringify(localStorage.getItem(city)));
-//   }); 
 
-// })
-
-// }
-
-// pastSearches();
