@@ -24,17 +24,18 @@ $(searchBtnEl).on ('click', function (event) {
     cities.push(city);
     console.log(cities);
     getCurrentWeather(city);
-    get5Day(city);
     cityInputEl.value = '';
 
-    cities.forEach
+  
     var $button = $(`<button type='button' class='btn btn-secondary custom-btn'>${city}</button>`);
     // Append it
     $('#past-searches').append($button);
 
     // Event for this button 
     $button.on('click',function(){
-    getCurrentWeather(JSON.parse(localStorage.getItem(city)));
+      let cityName = $(this).text();
+      console.log(cityName);
+      getCurrentWeather(cityName);
     }); 
 
   } else {
@@ -145,30 +146,24 @@ function get5Day (lon, lat) {
         return response.json();
       })
       .then(function(data){
-        // console.log(data);
         let list = data['daily'];
         let copyOfList = [...list];
-        // console.log(copyOfList);
         copyOfList.shift();
         copyOfList.splice(5, 2);
-        console.log(copyOfList);
 
-        // console.log(list);
+        $('#future-weather-data').empty();
+        
         for(let i = 0; i < (copyOfList.length); i++) {
           let retrievedDate = new Date(copyOfList[i].dt * 1000);
           let topDates = retrievedDate.getMonth() + "/" + retrievedDate.getDate() + "/" + retrievedDate.getFullYear();
-          console.log(topDates);
 
           let weatherIcon = copyOfList[i].weather[0].icon;
-          console.log(weatherIcon);
-
 
           let temp = copyOfList[i].temp.day;
-          console.log(temp);
+
           let wind = copyOfList[i].wind_speed;
-          console.log(wind);
+       
           let humidity = copyOfList[i].humidity;
-          console.log(humidity);
 
           let card = document.createElement('div');
           card.classList.add('card');
@@ -187,6 +182,7 @@ function get5Day (lon, lat) {
           `;
 
           $('#future-weather-data').append(card);
+         
 
 
   
