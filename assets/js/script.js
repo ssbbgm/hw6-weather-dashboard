@@ -21,12 +21,27 @@ $(searchBtnEl).on ('click', function (event) {
   let city = cityInputEl.value.trim();
 
   if (city) {
+    cities.push(city);
+    console.log(cities);
     getCurrentWeather(city);
-
+    get5Day(city);
     cityInputEl.value = '';
+
+    cities.forEach
+    var $button = $(`<button type='button' class='btn btn-secondary custom-btn'>${city}</button>`);
+    // Append it
+    $('#past-searches').append($button);
+
+    // Event for this button 
+    $button.on('click',function(){
+    getCurrentWeather(JSON.parse(localStorage.getItem(city)));
+    }); 
+
   } else {
     alert('Please enter a city');
   }
+
+
 }) 
 
 //Get the current weather data
@@ -185,3 +200,22 @@ function get5Day (lon, lat) {
 
       })
 }
+
+// function pastSearches (city) {
+
+//   $(searchBtnEl).on ('click', function (event) {
+//   getCurrentWeather(JSON.parse(localStorage.getItem(city)));
+//   var $button = $(`<button type='button' class='btn btn-secondary'>${city}</button>`);
+//   // Append it
+//   $('#past-searches').append($button);
+
+//   // Event for this button 
+//   $button.on('click',function(){
+//     getCurrentWeather(JSON.stringify(localStorage.getItem(city)));
+//   }); 
+
+// })
+
+// }
+
+// pastSearches();

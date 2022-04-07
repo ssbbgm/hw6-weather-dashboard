@@ -20,3 +20,9 @@
 .high {
     background-color: red;
 }
+
+.custom-btn {
+    width: 90%;
+    height: 10%
+}
+
