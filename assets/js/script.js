@@ -78,7 +78,7 @@ let displayCityData = function (weather) {
     $('#current-icon').empty();
 
     const weatherIcon = document.createElement('img');
-    weatherIcon.setAttribute('src', ` http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`)
+    weatherIcon.setAttribute('src', ` https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`)
     $('#current-icon').append(weatherIcon);
 
     $("#temp").html(`Temp: ${weather.main.temp}&deg;F`);
@@ -166,7 +166,7 @@ function get5Day (lon, lat) {
             <div class="card">
               <div class="card-header">${topDates}</div>
               <ul class=" list-group list-group-flush">
-              <li class="list-group-item"><img src="http://openweathermap.org/img/wn/${weatherIcon}@2x.png"></li>
+              <li class="list-group-item"><img src="https://openweathermap.org/img/wn/${weatherIcon}@2x.png"></li>
               <li class="list-group-item">Temp: ${temp}&deg;F</li>
               <li class="list-group-item">Wind: ${wind} MPH</li>
               <li class="list-group-item">Humidity: ${humidity} %</li>
@@ -181,7 +181,7 @@ function get5Day (lon, lat) {
       })
 }
 
-function getPastSearches(){
+function getPastSearches() {
     let cities = JSON.parse(localStorage.getItem('searchHistory'));
     $('#past-searches').html('');
     cities.forEach(function(city){
