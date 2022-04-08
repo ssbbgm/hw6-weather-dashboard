@@ -16,7 +16,6 @@ let cities = [];
 
 getPastSearches();
 
-
 //Form Submission action
 $(searchBtnEl).on ('click', function formSubmission (event) {
   event.preventDefault();
