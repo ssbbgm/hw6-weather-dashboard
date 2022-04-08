@@ -183,7 +183,7 @@ function get5Day (lon, lat) {
 }
 
 function getPastSearches(){
-    let cities = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    let cities = JSON.parse(localStorage.getItem('searchHistory'));
     $('#past-searches').html('');
     cities.forEach(function(city){
     let $button = $(`<button type='button' class='city-btn btn btn-secondary custom-btn'>${city}</button>`);
