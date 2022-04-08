@@ -16,6 +16,7 @@ let cities = [];
 
 getPastSearches();
 
+
 //Form Submission action
 $(searchBtnEl).on ('click', function formSubmission (event) {
   event.preventDefault();
@@ -34,8 +35,6 @@ $(searchBtnEl).on ('click', function formSubmission (event) {
   }
 
 }) 
-
-
 
 
 //Get the current weather data
@@ -184,18 +183,17 @@ function get5Day (lon, lat) {
 }
 
 function getPastSearches(){
-    let cities = JSON.parse(localStorage.getItem('searchHistory'));
+    let cities = JSON.parse(localStorage.getItem('searchHistory')) || [];
     $('#past-searches').html('');
     cities.forEach(function(city){
-      let $button = $(`<button type='button' class='city-btn btn-secondary custom-btn'>${city}</button>`);
+    let $button = $(`<button type='button' class='city-btn btn btn-secondary custom-btn'>${city}</button>`);
     // Append it
     $('#past-searches').append($button);
-
-  })}
+    })
+}
   
 // Event for this button 
 $('#past-searches').on('click', '.city-btn', function (event){
-  console.log('past searches clicked on');
   event.preventDefault();
   let cityName = $(this).text();
   getCurrentWeather(cityName);

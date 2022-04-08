@@ -21,14 +21,17 @@
     background-color: red;
 }
 
-.custom-btn {
-    width: 90%;
-    height: 10%
+.custom-btn, .city-btn {
+    width: 80%;
+    height: 10%;
+    margin-left: 25px;
+    margin-top: 2%;
+    padding: 15px;
 }
 
 #past-searches {
     display: flex;
     flex-direction: column;
-    flex: 0 1 inherit;
+    flex: 1 2 auto;
 }
 
