@@ -7,9 +7,11 @@ This is a simple calendar application that allows a user to save event for each 
 ## VISUALS
 
 
-![Project Start Page](./assets/images/scheduler-start-page.png)
+![Project Start Page](./assets/images/start-page.png)
 
-![Demo of the project.](./assets/images/work-day-scheduler-demo.gif)
+![Project After Start](./assets/images/city-search.png)
+
+![Demo of the project.](./assets/images/weather-dashboard-demo.gif)
 
 ## POINTS OF INTEREST
 
