@@ -2,7 +2,7 @@
 
 # DESCRIPTION
 
-This is a simple calendar application that allows a user to save event for each hour of the day by modifying starter code. This app runs in the browser and features dynamically updated HTML and CSS powered by Bootstrap and jQuery.
+This is a weather application that allows a user to find out the forecast information for a city using the third-party API called OpenWeatherAPI. This app runs in the browser and features dynamically updated HTML and CSS powered by Bootstrap and jQuery.
 
 ## VISUALS
 
