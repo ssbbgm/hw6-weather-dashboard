@@ -1,4 +1,4 @@
-# hw6-weather-dashboard
+# Weather Dashboard
 
 # DESCRIPTION
 
@@ -36,4 +36,4 @@ OpenWeatherAPI
 
 ## DEPLOYED APPLICATION
 
-https://ssbbgm.github.io/hw6-weather-dashboard/
+https://ssbbgm.github.io/weather-dashboard/
